@@ -1,0 +1,33 @@
+[tool.setuptools]
+packages = ["cryptosystems"]
+
+[build-system]
+requires      = ["wheel", "setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cryptosystems"
+version = "0.0.1"
+authors = [
+  { name="Ishan Surana", email="ishansurana1234@gmail.com" },
+]
+maintainers = [
+  { name="Ishan Surana", email="ishansurana1234@gmail.com" },
+]
+description = "A module for cryptography built from scratch, offering a robust suite of classes and functions for both symmetric and asymmetric encryption, as well as hashing functionalities"
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: Microsoft :: Windows",
+]
+dependencies = []
+requires-python = ">=3.10"
+keywords = [ "cryptography", "encryption", "decryption", "hashing", "symmetric encryption", "asymmetric encryption", "cipher", "hash functions", "Python cryptography", "lightweight cryptography", "dependency-free"]
+
+[project.urls]
+Homepage = "https://cryptosystems.readthedocs.io/en/latest/"
+Documentation = "https://cryptosystems.readthedocs.io/en/latest/"
+Repository = "https://github.com/ishan-surana/cryptosystems"
+Changelog = "https://github.com/ishan-surana/cryptosystems/releases"
+Issues = "https://github.com/ishan-surana/cryptosystems/issues"
