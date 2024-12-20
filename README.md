@@ -1,9 +1,34 @@
-# Cryptosystems Package
+<h1 align="center">
+<img src="https://ishan-surana.github.io/images/cryptosystems.png" width="300">
+</h1>
+
+<h1 align="center">𝚌𝚛𝚢𝚙𝚝𝚘𝚜𝚢𝚜𝚝𝚎𝚖𝚜</h1>
+
+<span align="center">
+  
+[![Licence](https://badgen.net/github/license/ishan-surana/cryptosystems?color=DC143D)](https://github.com/ishan-surana/cryptosystems/blob/main/LICENCE)
+[![Python](https://img.shields.io/badge/python-%3E=3.10-slateblue.svg)](https://www.python.org/downloads/release/python-3119/)
+[![Wheel](https://img.shields.io/badge/wheel-yes-FF00C9.svg)](https://pypi.org/project/cryptosystems/#files)
+[![Maintained](https://img.shields.io/badge/maintained-yes-cyan)](https://github.com/ishan-surana/MetaDataScraper/pulse)
+[![OS](https://img.shields.io/badge/OS-Windows,%20Linux,%20Mac-lightgreen)](https://www.microsoft.com/software-download/windows11)
+[![Documentation Status](https://readthedocs.org/projects/cryptosystems/badge/?version=latest)](https://cryptosystems.readthedocs.io/en/latest/?badge=latest)
+
+</span>
 
 ## Overview
-The `cryptosystems` package offers a robust suite of classes and functions for both symmetric and asymmetric encryption, as well as hashing functionalities. Designed for seamless encryption, decryption, and cryptographic operations, this package is lightweight and efficient, relying solely on Python’s built-in libraries: `os` and `hashlib`. With all cryptographic logic implemented from scratch, cryptosystems provides a streamlined, dependency-free solution, ensuring consistency and reliability across different environments as well as Python versions.
+The `cryptosystems` package offers a robust suite of classes and functions for symmetric and asymmetric encryption, hashing algorithms, key exchange protocols as well as mathematical utility functions. Designed for seamless encryption, decryption, and cryptographic operations, this package is lightweight and efficient, relying solely on Python’s built-in libraries: `ctypes`, `warnings` and `hashlib`. With almost all of the cryptographic logic implemented from scratch, `cryptosystems` provides a streamlined, dependency-free solution, ensuring consistency and reliability across different environments as well as Python versions.
 
-## Key Advantages
+## 📜 Changelog for `cryptosystems` v1.0.0 📜
+- **🚀 Improved Performance with GMP 🚀:** Optimized performance using GMP for faster computations.
+- **🧩 Modularized Codebase 🧩:** Refactored the codebase to be more modular for better maintainability and scalability.
+- **🔄 Updated Function Interfaces for Asymmetric Cryptosystems 🔄:** Revised function interfaces, with added `generate_keys` functionality.
+- **📝 API Documentation Created 📝:** Comprehensive API documentation has been created to assist with the usage of `cryptosystems`, covering cryptosystem description, mathematical details, usage examples and more.
+- **🛠️ Modified Rabin implementation 🛠️:** Modified Rabin implementation with added functionality to verify plaintext using SHA-256 hash.
+- **🔧 Fixed ElGamal errors 🔧:** Corrected the ElGamal implementation with a newly added `find_generator` function.
+- **🌀 Extended Support for ECC Curves 🌀:** Added support for additional ECC curves, including Montgomery curves.
+- **🔐 SHA-512 Wrapper Added 🔐:** Added a wrapper for the SHA-512 algorithm to the `hash_functions` submodule.
+
+## Key Features
 - **Dependency-Free** 🚫📦: Operates solely on Python's built-in modules, eliminating the need for external libraries.
 - **Version Stability** 🔒📅: Crafted to maintain consistent functionality across Python versions.
 - **Optimized for Performance** ⚡⚙️: Built from scratch for efficient and consistant cryptographic operations.
@@ -14,234 +39,22 @@ The `cryptosystems` package offers a robust suite of classes and functions for b
 ## Installation
 To install the package, simply clone the repository and install the dependencies:
 ```bash
-git clone https://github.com/ishan-surana/cryptosystems.git
-cd cryptosystems
-pip install -r requirements.txt
+pip install cryptosystems
 ```
 
 ## Usage
 
-**<details><summary> Symmetric Ciphers (Basic Cryptosystems)**</summary>
+The general structure for usage is to create an object of the respective cryptosystem, with the key as argument if required. Similar usage for the utility functions as well. See [docs](https://cryptosystems.readthedocs.io/en/latest/) for the exact reference example of a specific cryptosystem if required.
 
-#### AdditiveCipher
 ```python
-from cryptosystems import AdditiveCipher
+from cryptosystems import SomeCryptosystem
 
-cipher = AdditiveCipher(3)
+cipher = SomeCryptosystem()
 ciphertext = cipher.encrypt("Hello World")
-print(ciphertext)  # Output: 'Khoor Zruog'
+print(ciphertext)  # Output: 'ciphertext string'
 plaintext = cipher.decrypt(ciphertext)
 print(plaintext)  # Output: 'Hello World'
 ```
-
-#### MultiplicativeCipher
-```python
-from cryptosystems import MultiplicativeCipher
-
-cipher = MultiplicativeCipher(5)
-ciphertext = cipher.encrypt("Hello World")
-print(ciphertext)  # Output: 'Czggj Rjmgy'
-plaintext = cipher.decrypt(ciphertext)
-print(plaintext)  # Output: 'Hello World'
-```
-
-#### AffineCipher
-```python
-from cryptosystems import AffineCipher
-
-cipher = AffineCipher(5, 8)
-ciphertext = cipher.encrypt("Hello World")
-print(ciphertext)  # Output: 'Rclla Oaplx'
-plaintext = cipher.decrypt(ciphertext)
-print(plaintext)  # Output: 'Hello World'
-```
-
-#### HillCipher
-```python
-from cryptosystems import HillCipher
-
-cipher = HillCipher([[3, 3], [2, 5]])
-ciphertext = cipher.encrypt("HelloWorld")
-print(ciphertext)  # Output: 'HiozeIpjql'
-plaintext = cipher.decrypt(ciphertext)
-print(plaintext)  # Output: 'HelloWorld'
-```
-
-#### VigenereCipher
-```python
-from cryptosystems import VigenereCipher
-
-cipher = VigenereCipher("key")
-ciphertext = cipher.encrypt("Hello World")
-print(ciphertext)  # Output: 'Rijvs Uyvjk'
-plaintext = cipher.decrypt(ciphertext)
-print(plaintext)  # Output: 'Hello World'
-```
-
-#### PlayfairCipher
-```python
-from cryptosystems import PlayfairCipher
-
-cipher = PlayfairCipher("key")
-ciphertext = cipher.encrypt("Hello World")
-print(ciphertext)  # Output: 'Dahak Ldskn'
-plaintext = cipher.decrypt(ciphertext)
-print(plaintext)  # Output: 'Hello World'
-```
-
-#### AutoKeyCipher
-```python
-from cryptosystems import AutoKeyCipher
-
-cipher = AutoKeyCipher("key")
-ciphertext = cipher.encrypt("Hello World")
-print(ciphertext)  # Output: 'Rijss Hzfhr'
-plaintext = cipher.decrypt(ciphertext)
-print(plaintext)  # Output: 'Hello World'
-```
-
-</details>
-
-**<details><summary> Symmetric Ciphers (Advanced Cryptosystems)**</summary>
-
-#### DES
-```python
-from cryptosystems import DES
-
-cipher = DES("password")
-ciphertext = cipher.encrypt("Hello World")
-print(ciphertext)  # Output: b'\xf4\\V\x1a\xc7S\xb7\xdeZ\xc1\xe9\x14\n\x15Y\xe8'
-plaintext = cipher.decrypt(ciphertext)
-print(plaintext)  # Output: 'Hello World'
-```
-
-#### AES
-```python
-from cryptosystems import AES
-
-cipher = AES("passwordpassword")
-ciphertext = cipher.encrypt("Hello World")
-print(ciphertext)  # Output: b'\x9cHS\xc2\x00\x0c\xba\x82Bj\x90\xc3t|4}'
-plaintext = cipher.decrypt(ciphertext)
-print(plaintext)  # Output: 'Hello World'
-```
-
-</details>
-
-**<details><summary> Asymmetric Ciphers**</summary>
-
-#### RSA
-```python
-from cryptosystems import RSA
-
-rsa = RSA(1024)
-ciphertext = rsa.encrypt(123)
-print(ciphertext)  # Output: 1234567890
-plaintext = rsa.decrypt(ciphertext)
-print(plaintext)  # Output: 123
-```
-
-#### ElGamal
-```python
-from cryptosystems import ElGamal
-
-elgamal = ElGamal(1024)
-ciphertext = elgamal.encrypt(123)
-print(ciphertext)  # Output: (123, 123)
-plaintext = elgamal.decrypt(ciphertext)
-print(plaintext)  # Output: 123
-```
-
-#### Rabin
-```python
-from cryptosystems import Rabin
-
-rabin = Rabin(1024)
-ciphertext = rabin.encrypt(123)
-print(ciphertext)  # Output: 1234567890
-plaintext = rabin.decrypt(ciphertext)
-print(plaintext)  # Output: 123
-```
-
-#### Paillier
-```python
-from cryptosystems import Paillier
-
-paillier = Paillier(1024)
-ciphertext = paillier.encrypt(123)
-print(ciphertext)  # Output: 1234567890
-plaintext = paillier.decrypt(ciphertext)
-print(plaintext)  # Output: 123
-```
-
-#### DiffieHellman
-```python
-from cryptosystems import DiffieHellman
-
-diffiehellman = DiffieHellman()
-shared_secret = diffiehellman.getSharedSecret()
-print(shared_secret)  # Output: 1234567890
-```
-
-</details>
-
-**<details><summary> Hash Functions**</summary>
-
-#### MD5
-```python
-from cryptosystems import MD5
-
-md5 = MD5()
-hash_value = md5.hash("Hello World")
-print(hash_value)  # Output: 'b10a8db164e0754105b7a99be72e3fe5'
-```
-
-#### SHA256
-```python
-from cryptosystems import SHA256
-
-sha256 = SHA256()
-hash_value = sha256.hash("Hello World")
-print(hash_value)  # Output: 'a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e'
-```
-
-</details>
-
-**<details><summary> Utility Functions**</summary>
-
-#### getRandomInteger
-```python
-from cryptosystems import getRandomInteger
-
-random_int = getRandomInteger(1024)
-print(random_int)
-```
-
-#### getRandomRange
-```python
-from cryptosystems import getRandomRange
-
-random_range = getRandomRange(1, 100)
-print(random_range)
-```
-
-#### isPrime
-```python
-from cryptosystems import isPrime
-
-prime_check = isPrime(17)
-print(prime_check)  # Output: True
-```
-
-#### getPrime
-```python
-from cryptosystems import getPrime
-
-prime_number = getPrime(1024)
-print(prime_number)
-```
-
-</details>
 
 ## License
 This project is licensed under the Apache License - see the [LICENSE](LICENCE) file for details.
@@ -250,4 +63,5 @@ This project is licensed under the Apache License - see the [LICENSE](LICENCE) f
 - **Ishan Surana** - *Inception, implementation and testing* - [GitHub](https://github.com/ishan-surana)
 
 ## Acknowledgments
-- PyCryptodome, for the logic of functions in the [functions submodule](cryptosystems/functions.py)
+- ~~PyCryptodome, for the logic of functions in the [functions submodule](cryptosystems/functions.py)~~ (Python-based implementation, discontinued from version v1.x onward)
+- `bcrypt.h` and `gmp.h`, for functions in the [functions submodule](cryptosystems/functions.py)

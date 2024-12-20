@@ -1,0 +1,134 @@
+name: Compile and push DLLs to source code
+
+on: 
+  push:
+    paths:
+      - "cryptosystems/functions_module.c"
+  pull_request:
+    paths:
+      - "cryptosystems/functions_module.c"
+  workflow_dispatch:
+
+jobs:
+  macos:
+    runs-on: macos-latest  # Use the latest macOS runner
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # Step 2: Install GMP using Homebrew
+      - name: Install GMP
+        run: |
+          brew install gmp
+      # Step 3: Check GMP installation path
+      - name: Check GMP installation path
+        run: |
+          brew --prefix gmp
+      # Step 4: Compile the .dylib with GMP
+      - name: Compile .dylib
+        run: |
+          cd cryptosystems/functions_module
+          cp ../functions_module.c .
+          clang -dynamiclib -o functions_module.dylib functions_module.c -I/opt/homebrew/opt/gmp/include -L/opt/homebrew/opt/gmp/lib -lgmp
+      # Step 5: Upload the .dylib file as an artifact
+      - name: Upload .dylib as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: functions_module_dylib
+          path: cryptosystems/functions_module/functions_module.dylib
+
+  linux:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # Step 2: Install GMP using apt
+      - name: Install GMP
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgmp-dev
+      # Step 3: Check GMP installation path
+      - name: Check GMP installation path
+        run: |
+          dpkg-query -L libgmp-dev
+      # Step 4: Compile the .so with GMP
+      - name: Compile .so
+        run: |
+          cd cryptosystems/functions_module
+          cp ../functions_module.c .
+          gcc -shared -fPIC -o functions_module.so -I /usr/include/x86_64-linux-gnu/ -L /usr/lib/x86_64-linux-gnu/ functions_module.c -lgmp
+      # Step 5: Upload the .so file as an artifact
+      - name: Upload .so as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: functions_module_so
+          path: cryptosystems/functions_module/functions_module.so
+
+  windows:
+    runs-on: windows-latest  # Use the latest Windows runner
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      # Step 2: Compile the .dll with GMP
+      - name: Check path
+        run: |
+          cd cryptosystems\functions_module
+          cp ../functions_module.c .
+          gcc -shared -o functions_module.dll functions_module.c -I ./gmp-6.3.0/ -L ./gmp-6.3.0/ -lgmp -fPIC
+      # Step 3: Upload the .dll file as an artifact
+      - name: Upload .dll as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: functions_module_dll
+          path: cryptosystems/functions_module/functions_module.dll
+
+  push_artifacts:
+    needs: [macos, linux, windows]  # Ensure this runs after the build jobs
+    runs-on: ubuntu-latest  # Can run on any runner (Ubuntu used here)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Create the artifacts directory before downloading
+      - name: Create artifacts directory
+        run: |
+          mkdir -p cryptosystems/functions_module
+
+      # Download macOS artifact
+      - name: Download macOS artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: functions_module_dylib
+          path: cryptosystems/functions_module/
+
+      # Download Linux artifact
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: functions_module_so
+          path: cryptosystems/functions_module/
+
+      # Download Windows artifact
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: functions_module_dll
+          path: cryptosystems/functions_module/
+
+      - name: Set up Git for pushing
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add and commit all artifacts
+        run: |
+          git add cryptosystems/functions_module/*
+          git commit -m "Add compiled artifacts for macOS, Linux, and Windows"
+
+      - name: Push changes to main branch
+        run: |
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub's token to push changes

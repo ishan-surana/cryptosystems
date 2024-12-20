@@ -11,7 +11,7 @@ The `cryptosystems` module provides classes and functions for various symmetric 
     + **PlayfairCipher**: A class for the Playfair Cipher.
     + **AutokeyCipher**: A class for the Autokey Cipher.
 
-- SYMMETRIC CIPHERS (Advanced Cryptosystems):
+- SYMMETRIC CIPHERS (Modern Cryptosystems):
     + **DES**: A class for the Data Encryption Standard (DES). Provides methods for encryption and decryption. Only ECB mode is supported.
     + **AES**: A class for the Advanced Encryption Standard (AES). Provides methods for encryption and decryption. Supports key sizes of 128, 192, and 256 bits. Only ECB mode is supported.
 
@@ -32,8 +32,13 @@ The module also includes the following functions in the `functions` submodule:
 - **getRandomRange**: Generate a random number N such that a <= N < b.
 - **isPrime**: Test if a number is prime, using the Miller-Rabin test.
 - **getPrime**: Return a random N-bit prime number.
-- **miller_rabin**: Miller-Rabin primality test.
 """
 
-from .cryptosystems import *
+import sys
+sys.set_int_max_str_digits(0)
 from .functions import *
+from .classical_symmetric import *
+from .modern_symmetric import *
+from .asymmetric import *
+from .key_exchange import *
+from .hash_functions import *

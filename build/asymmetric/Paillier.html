@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Paillier &#8212; cryptosystems 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'asymmetric/Paillier';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ECC" href="ECC.html" />
+    <link rel="prev" title="Rabin" href="Rabin.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://ishan-surana.github.io/images/cryptosystems.png" class="logo__image only-light" alt="cryptosystems 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="https://ishan-surana.github.io/images/cryptosystems.png" class="logo__image only-dark" alt="cryptosystems 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ishan-surana/cryptosystems" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/cryptosystems/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/pypi/v/cryptosystems?label=latest+release&color=blue" class="icon-link-image" alt="PyPI"/></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">Standards</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../classical_symmetric/index.html">Classical Symmetric Cryptosystems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/AdditiveCipher.html">AdditiveCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/MultiplicativeCipher.html">MultiplicativeCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/AffineCipher.html">AffineCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/HillCipher.html">HillCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/PlayfairCipher.html">PlayfairCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/VigenereCipher.html">VigenèreCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/AutokeyCipher.html">AutokeyCipher</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../modern_symmetric/index.html">Modern Symmetric Cryptosystems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../modern_symmetric/DES.html">DES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modern_symmetric/AES.html">AES</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Asymmetric Cryptosystems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="RSA.html">RSA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ElGamal.html">ElGamal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Rabin.html">Rabin</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Paillier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ECC.html">ECC</a></li>
+</ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../key_exchange/index.html">Key Exchange</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../key_exchange/DiffieHellman.html">DiffieHellman</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../key_exchange/ECDH.html">ECDH</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../hash_functions/index.html">Hash Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hash_functions/MD5.html">MD5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hash_functions/SHA256.html">SHA256</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hash_functions/SHA512.html">SHA512</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../functions/index.html">Utility Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functions/isPrime.html">isPrime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/getPrime.html">getPrime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/getRandomInteger.html">getRandomInteger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/getRandomRange.html">getRandomRange</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ishan-surana/cryptosystems" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ishan-surana/cryptosystems/blob/main/docs/asymmetric/Paillier.rst?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/asymmetric/Paillier.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Paillier</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Paillier"><code class="docutils literal notranslate"><span class="pre">Paillier</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-details">Mathematical Details</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paillier-key-generation">Paillier Key Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paillier-encryption-decryption-process">Paillier Encryption/Decryption Process</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paillier-homomorphic-property">Paillier Homomorphic Property</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate_keypair"><code class="docutils literal notranslate"><span class="pre">generate_keypair()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">encrypt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decrypt"><code class="docutils literal notranslate"><span class="pre">decrypt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homomorphic_add"><code class="docutils literal notranslate"><span class="pre">homomorphic_add()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sign"><code class="docutils literal notranslate"><span class="pre">sign()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify"><code class="docutils literal notranslate"><span class="pre">verify()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="paillier">
+<h1>Paillier<a class="headerlink" href="#paillier" title="Link to this heading">#</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">Paillier</span></code> class implements the Paillier public-key encryption algorithm, whose security is based on the Decisional Composite Residuosity Assumption (DCRA).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="Paillier">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Paillier</span></span><a class="headerlink" href="#Paillier" title="Link to this definition">#</a></dt>
+<dd><p>Creates a new Paillier instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bits</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Number of bits for the modulus. Primes are generated having half the bits. Default is <strong>2048</strong>.</p></li>
+<li><p><strong>force</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Argument to force computations with higher orders of numbers, irrespective of resultant performance.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The Paillier signature scheme has not been implemented yet, and hence, the <code class="docutils literal notranslate"><span class="pre">sign</span></code> and <code class="docutils literal notranslate"><span class="pre">verify</span></code> functions do not yield any result. Use the Paillier cryptosystem accordingly.</p>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>The Paillier cryptosystem is a probabilistic asymmetric encryption algorithm that is semantically secure under the decisional composite residuosity assumption. It is particularly known for its homomorphic properties, allowing operations to be performed on encrypted data without decrypting it. Specifically, Paillier supports both additive homomorphism and partial homomorphism, which is useful for secure computations on encrypted data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The implementation of Paillier cryptosystem in this module uses a simpler variant, recommended to faster computation time for implementation purposes. The details can be found <a class="reference external" href="https://en.wikipedia.org/wiki/Paillier_cryptosystem#Key_generation">here</a></p>
+</div>
+</section>
+<section id="mathematical-details">
+<h2>Mathematical Details<a class="headerlink" href="#mathematical-details" title="Link to this heading">#</a></h2>
+<section id="paillier-key-generation">
+<h3>Paillier Key Generation<a class="headerlink" href="#paillier-key-generation" title="Link to this heading">#</a></h3>
+<p>The Paillier key generation process involves the following steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Choose two large prime numbers</strong>: Two large prime numbers, <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span>, are chosen randomly.</p></li>
+<li><p><strong>Compute the modulus</strong>: The modulus, <span class="math notranslate nohighlight">\(n\)</span>, is computed as:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[n = p \cdot q\]</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Compute the Carmichael’s totient</strong>: The Carmichael’s totient <span class="math notranslate nohighlight">\(\lambda(n)\)</span> is computed as:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\lambda(n) = \text{lcm}(p-1, q-1)\]</div>
+<p>However, using the simplified version of the Paillier algorithm, we use:</p>
+<div class="math notranslate nohighlight">
+\[\lambda(n) = \phi(n) = (p-1) \cdot (q-1)\]</div>
+<ol class="arabic simple" start="4">
+<li><p><strong>Choose the public key</strong>: A random integer <span class="math notranslate nohighlight">\(g\)</span> is selected such that its order is <span class="math notranslate nohighlight">\(n^2\)</span>. The public key is then the pair <span class="math notranslate nohighlight">\((n, g)\)</span>.</p></li>
+<li><p><strong>Compute the private key</strong>: The private key <span class="math notranslate nohighlight">\(\mu\)</span> is computed as:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\mu = (L(g^\lambda \mod n^2))^{-1} \mod n\]</div>
+<p>where <span class="math notranslate nohighlight">\(L(x) = \frac {(x-1)}{n}\)</span> is the L-function.</p>
+</section>
+<section id="paillier-encryption-decryption-process">
+<h3>Paillier Encryption/Decryption Process<a class="headerlink" href="#paillier-encryption-decryption-process" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Encryption</strong>: The plaintext message, <span class="math notranslate nohighlight">\(m\)</span>, is encrypted using the public key <span class="math notranslate nohighlight">\((n, g)\)</span> as follows:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[c = g^m \cdot r^n \mod n^2\]</div>
+<p>where <span class="math notranslate nohighlight">\(r\)</span> is a random integer chosen from the range <span class="math notranslate nohighlight">\(1 &lt; r &lt; n\)</span>.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Decryption</strong>: The ciphertext message, <span class="math notranslate nohighlight">\(c\)</span>, is decrypted using the private key <span class="math notranslate nohighlight">\((n, \lambda(n), \mu)\)</span> as follows:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[m = L(c^\lambda \mod n^2) \cdot \mu \mod n\]</div>
+<p>where <span class="math notranslate nohighlight">\(L(x)\)</span> is the L-function, defined as <span class="math notranslate nohighlight">\(L(x) = \frac {(x-1)}{n}\)</span>.</p>
+</section>
+</section>
+<section id="paillier-homomorphic-property">
+<h2>Paillier Homomorphic Property<a class="headerlink" href="#paillier-homomorphic-property" title="Link to this heading">#</a></h2>
+<p>Paillier is additively homomorphic, meaning that given two ciphertexts <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> of messages <span class="math notranslate nohighlight">\(m_1\)</span> and <span class="math notranslate nohighlight">\(m_2\)</span>, the following holds:</p>
+<div class="math notranslate nohighlight">
+\[c_1 \cdot c_2 \mod n^2 = g^{m_1 + m_2} \cdot r^n \mod n^2\]</div>
+<p>This allows for the addition of encrypted messages without decrypting them.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example usage of Paillier to encrypt, decrypt, and perform homomorphic addition</span>
+<span class="kn">from</span> <span class="nn">cryptosystems</span> <span class="kn">import</span> <span class="n">Paillier</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">Paillier</span><span class="p">()</span>
+<span class="n">public_key</span><span class="p">,</span> <span class="n">private_key</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">generate_keys</span><span class="p">()</span>  <span class="c1"># Generate Paillier keys</span>
+<span class="n">ciphertext</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="n">public_key</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>  <span class="c1"># Encrypted form of 42</span>
+<span class="n">plaintext</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="n">private_key</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>  <span class="c1"># 42</span>
+<span class="n">ciphertext2</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="mi">58</span><span class="p">,</span> <span class="n">public_key</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">homomorphic_add</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">,</span> <span class="n">ciphertext2</span><span class="p">,</span> <span class="n">public_key</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Encrypted form of 100 (42 + 58)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">private_key</span><span class="p">))</span>  <span class="c1"># 100</span>
+</pre></div>
+</div>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="generate_keypair">
+<span class="sig-name descname"><span class="pre">generate_keypair</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span></span><a class="headerlink" href="#generate_keypair" title="Link to this definition">#</a></dt>
+<dd><p>Generates a new Paillier key pair, in the form <span class="math notranslate nohighlight">\((n, g)\)</span> for the public key and <span class="math notranslate nohighlight">\((n, y, u)\)</span> for the private key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A tuple containing the public key and private key.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)">tuple</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="encrypt">
+<span class="sig-name descname"><span class="pre">encrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plaintext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">public_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#encrypt" title="Link to this definition">#</a></dt>
+<dd><p>Encrypts the given plaintext using the Paillier algorithm and returns the ciphertext.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plaintext</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><em>bytes</em></a>) – The plaintext message to be encrypted.</p></li>
+<li><p><strong>public_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a>) – The public key used for encryption, in the form <span class="math notranslate nohighlight">\((n, g)\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encrypted ciphertext.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="decrypt">
+<span class="sig-name descname"><span class="pre">decrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ciphertext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">private_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#decrypt" title="Link to this definition">#</a></dt>
+<dd><p>Decrypts the given ciphertext using the Paillier algorithm and returns the deciphered plaintext.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ciphertext</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The ciphertext message to be decrypted.</p></li>
+<li><p><strong>private_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a>) – The private key used for decryption, in the form <span class="math notranslate nohighlight">\((n, y, u)\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decrypted plaintext.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="homomorphic_add">
+<span class="sig-name descname"><span class="pre">homomorphic_add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ciphertext1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ciphertext2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">public_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#homomorphic_add" title="Link to this definition">#</a></dt>
+<dd><p>Adds two ciphertexts together using the homomorphic properties of the Paillier algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ciphertext1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The first ciphertext message to be added.</p></li>
+<li><p><strong>ciphertext2</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The second ciphertext message to be added.</p></li>
+<li><p><strong>public_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a>) – The public key used for encryption, in the form <span class="math notranslate nohighlight">\((n, g)\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting ciphertext of the sum of the plaintexts.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Below functions are not implemented yet. Documentation is created only for reference.</p>
+</div>
+<dl class="py function">
+<dt class="sig sig-object py" id="sign">
+<span class="sig-name descname"><span class="pre">sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">private_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#sign" title="Link to this definition">#</a></dt>
+<dd><p>Signs the given message using the Paillier algorithm and returns the signature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><em>bytes</em></a>) – The plaintext message to be signed.</p></li>
+<li><p><strong>private_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a>) – The private key used for signing, the form <span class="math notranslate nohighlight">\((n, y, u)\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The signature (int) and the SHA256 hash (bytes) of the message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="verify">
+<span class="sig-name descname"><span class="pre">verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signature:</span> <span class="pre">(int</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_hash:</span> <span class="pre">bytes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">public_key:</span> <span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#verify" title="Link to this definition">#</a></dt>
+<dd><p>Verifies the given signature using the Paillier algorithm and returns True or False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signature</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The signature to be verified.</p></li>
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><em>bytes</em></a>) – The message whose signature is to be verified.</p></li>
+<li><p><strong>public_key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><em>tuple</em></a>) – The public key used for verification, in the form <span class="math notranslate nohighlight">\((n, g)\)</span>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True or False, the result of whether the signature is valid.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://link.springer.com/content/pdf/10.1007/3-540-48910-X_16.pdf">Paillier Original Paper</a></p></li>
+<li><p><cite>Paillier cryptosystem - Wikipedia &lt;https://en.wikipedia.org/wiki/Paillier_cryptosystem&gt;</cite></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Rabin.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Rabin</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ECC.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ECC</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Paillier"><code class="docutils literal notranslate"><span class="pre">Paillier</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-details">Mathematical Details</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paillier-key-generation">Paillier Key Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paillier-encryption-decryption-process">Paillier Encryption/Decryption Process</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paillier-homomorphic-property">Paillier Homomorphic Property</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate_keypair"><code class="docutils literal notranslate"><span class="pre">generate_keypair()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">encrypt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decrypt"><code class="docutils literal notranslate"><span class="pre">decrypt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homomorphic_add"><code class="docutils literal notranslate"><span class="pre">homomorphic_add()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sign"><code class="docutils literal notranslate"><span class="pre">sign()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify"><code class="docutils literal notranslate"><span class="pre">verify()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ishan Surana
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Ishan Surana.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

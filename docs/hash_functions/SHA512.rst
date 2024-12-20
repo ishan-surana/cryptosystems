@@ -1,0 +1,45 @@
+SHA512
+======
+
+The ``SHA512`` class implements the SHA-512 hash algorithm, as a direct wrapper on top of the functionality provided by ``hashlib``, which is part of the SHA-2 family of cryptographic hash functions. SHA-512 is a widely used cryptographic hash function that generates a secure 512-bit hash value from arbitrary input data.
+
+.. class:: SHA512
+
+    Creates a new SHA512 instance.
+
+Introduction
+------------
+
+SHA-512 (Secure Hash Algorithm 512-bit) is a cryptographic hash function that generates a 512-bit hash value, represented as a 128-character hexadecimal number. SHA-512 is part of the SHA-2 family, which was designed to provide greater security than its predecessor SHA-1. It is widely used in security applications, including digital signatures, certificates, and integrity checks, and is often employed in blockchain technologies and file integrity verifications.
+
+Usage
+-----
+
+.. code-block:: python
+
+    # Example usage of SHA512 to generate hash
+    from cryptosystems import SHA512
+    sha512 = SHA512()
+    message_hash = sha512.hash("Hello World") # b'\x86\x18D\xd6pN\x85s\xfe\xc3M\x96~ \xbc\xfe\xf3\xd4$\xcfH\xbe\x04\xe6\xdc\x08\xf2\xbdX\xc7)t3q\x01^\xad\x89\x1c\xc3\xcf\x1c\x9d4\xb4\x92d\xb5\x10u\x1b\x1f\xf9\xe57\x93{\xc4k]o\xf4\xec\xc8'
+    file_hash = sha512.hash_file("test.txt") # b'\x86\x18D\xd6pN\x85s\xfe\xc3M\x96~ \xbc\xfe\xf3\xd4$\xcfH\xbe\x04\xe6\xdc\x08\xf2\xbdX\xc7)t3q\x01^\xad\x89\x1c\xc3\xcf\x1c\x9d4\xb4\x92d\xb5\x10u\x1b\x1f\xf9\xe57\x93{\xc4k]o\xf4\xec\xc8'
+
+Methods
+-------
+
+.. function:: hash(message: (int | str | bytes)) -> bytes
+
+    Hashes the given message using the SHA-512 Algorithm and returns the digest.
+
+    :param message: The message to compute the MD5 hash of.
+    :type hash_value: int | str | bytes
+    :return: The SHA-512 hash digest of the message.
+    :rtype: str
+
+.. function:: hash_file(file: str) -> bytes
+
+    Hashes the given file using the SHA-512 Algorithm and returns the digest.
+
+    :param file: The original hash value to compare with the computed hash.
+    :type file: str
+    :return: The SHA-512 hash digest of the file with the given filename.
+    :rtype: str

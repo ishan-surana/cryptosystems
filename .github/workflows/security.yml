@@ -1,0 +1,48 @@
+name: Modification protection on restricted directories
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  check-modifications:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+
+    - name: Get previous commit hash and check for changes
+      env:
+        USER_NAME: ${{ github.actor }}
+        COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+        PREVIOUS_COMMIT: ${{ github.event.pull_request.base.sha || github.event.before.sha }}
+      run: |
+        # Define the list of restricted directories
+        RESTRICTED_DIRS=("cryptosystems/functions_module/" ".github/workflows/")  # Add all restricted directories here
+
+        if [ -z "$PREVIOUS_COMMIT" ]; then
+          PREVIOUS_COMMIT=$(git rev-parse HEAD~1)
+        fi
+        if [[ "$USER_NAME" = "github-actions[bot]" ]]; then
+          echo "Automated action by GitHub Actions Bot."
+        else
+          echo "Workflow initiated by $USER_NAME"
+          # Get list of modified files between the last commit (HEAD) and the previous commit
+          MODIFIED_FILES=$(git diff --name-only $PREVIOUS_COMMIT $COMMIT)  # Compare the last commit with its parent
+          echo $MODIFIED_FILES
+          # Check if any modified file is in any of the restricted directories
+          for DIR in "${RESTRICTED_DIRS[@]}"; do
+            if echo "$MODIFIED_FILES" | grep "^$DIR"; then
+              echo "Error: Changes detected in restricted directory: $DIR"
+              exit 1
+            fi
+          done
+          echo "No changes detected in restricted directories."
+        fi

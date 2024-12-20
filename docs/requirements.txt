@@ -1,0 +1,6 @@
+sphinx==7.1.2
+myst_parser
+sphinx-design
+sphinx-book-theme
+sphinx-copybutton
+m2r2

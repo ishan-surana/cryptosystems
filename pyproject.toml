@@ -7,14 +7,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cryptosystems"
-version = "0.0.1"
+version = "1.0.0"
 authors = [
   { name="Ishan Surana", email="ishansurana1234@gmail.com" },
 ]
 maintainers = [
   { name="Ishan Surana", email="ishansurana1234@gmail.com" },
 ]
-description = "A module for cryptography built from scratch, offering a robust suite of classes and functions for both symmetric and asymmetric encryption, as well as hashing functionalities"
+description = "A module for cryptography built from scratch, offering a robust suite of classes and functions for symmetric and asymmetric encryption, hashing algorithms, key exchange protocols as well as mathematical utility functions."
 readme = "README.md"
 classifiers = [
     "Programming Language :: Python :: 3",

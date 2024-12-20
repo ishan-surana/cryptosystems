@@ -1,0 +1,747 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>AES &#8212; cryptosystems 1.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modern_symmetric/AES';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Asymmetric Cryptosystems" href="../asymmetric/index.html" />
+    <link rel="prev" title="DES" href="DES.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="https://ishan-surana.github.io/images/cryptosystems.png" class="logo__image only-light" alt="cryptosystems 1.0.0 documentation - Home"/>
+    <script>document.write(`<img src="https://ishan-surana.github.io/images/cryptosystems.png" class="logo__image only-dark" alt="cryptosystems 1.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ishan-surana/cryptosystems" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://pypi.org/project/cryptosystems/" title="PyPI" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><img src="https://img.shields.io/pypi/v/cryptosystems?label=latest+release&color=blue" class="icon-link-image" alt="PyPI"/></a>
+        </li>
+</ul></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../standards.html">Standards</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../classical_symmetric/index.html">Classical Symmetric Cryptosystems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/AdditiveCipher.html">AdditiveCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/MultiplicativeCipher.html">MultiplicativeCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/AffineCipher.html">AffineCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/HillCipher.html">HillCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/PlayfairCipher.html">PlayfairCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/VigenereCipher.html">VigenèreCipher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../classical_symmetric/AutokeyCipher.html">AutokeyCipher</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Modern Symmetric Cryptosystems</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="DES.html">DES</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">AES</a></li>
+</ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../asymmetric/index.html">Asymmetric Cryptosystems</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../asymmetric/RSA.html">RSA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asymmetric/ElGamal.html">ElGamal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asymmetric/Rabin.html">Rabin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asymmetric/Paillier.html">Paillier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../asymmetric/ECC.html">ECC</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../key_exchange/index.html">Key Exchange</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../key_exchange/DiffieHellman.html">DiffieHellman</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../key_exchange/ECDH.html">ECDH</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../hash_functions/index.html">Hash Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../hash_functions/MD5.html">MD5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hash_functions/SHA256.html">SHA256</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hash_functions/SHA512.html">SHA512</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../functions/index.html">Utility Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../functions/isPrime.html">isPrime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/getPrime.html">getPrime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/getRandomInteger.html">getRandomInteger</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions/getRandomRange.html">getRandomRange</a></li>
+</ul><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ishan-surana/cryptosystems" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ishan-surana/cryptosystems/blob/main/docs/modern_symmetric/AES.rst?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/modern_symmetric/AES.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>AES</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AES"><code class="docutils literal notranslate"><span class="pre">AES</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-details">Mathematical Details</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aes-encryption-decryption-process">AES Encryption/Decryption Process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#round-function">Round Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-schedule">Key Schedule</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">encrypt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decrypt"><code class="docutils literal notranslate"><span class="pre">decrypt()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="aes">
+<h1>AES<a class="headerlink" href="#aes" title="Link to this heading">#</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">AES</span></code> class implements the Advanced Encryption Standard, a symmetric-key block cipher that encrypts and decrypts data using key sizes of 128, 192, or 256 bits.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="AES">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AES</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AES" title="Link to this definition">#</a></dt>
+<dd><p>Creates a new AES instance with the specified key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a><em> | </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><em>bytes</em></a>) – The key used for encryption, which can be 16, 24, or 32 bytes long.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>The Advanced Encryption Standard (AES) is a symmetric-key block cipher that encrypts and decrypts data in 128-bit blocks using key sizes of 128, 192, or 256 bits. AES operates through multiple rounds of processing based on the selected key size. The algorithm involves substitution, permutation, and mixing of data. AES is widely used and considered secure for modern applications, replacing older encryption algorithms like DES due to its larger key size and robustness against attacks.</p>
+</section>
+<section id="mathematical-details">
+<h2>Mathematical Details<a class="headerlink" href="#mathematical-details" title="Link to this heading">#</a></h2>
+<section id="aes-encryption-decryption-process">
+<h3>AES Encryption/Decryption Process<a class="headerlink" href="#aes-encryption-decryption-process" title="Link to this heading">#</a></h3>
+<ol class="arabic">
+<li><p><strong>Key Expansion</strong>: The AES key is expanded into an array of key schedule words, which are used in each round. The number of round keys depends on the key size:</p>
+<ul class="simple">
+<li><p>For a 128-bit key, there are 10 rounds.</p></li>
+<li><p>For a 192-bit key, there are 12 rounds.</p></li>
+<li><p>For a 256-bit key, there are 14 rounds.</p></li>
+</ul>
+<p>The expanded key is derived as follows:</p>
+<div class="math notranslate nohighlight">
+\[K_{i} = \text{Key Expansion}(K_0) \quad \text{for} \quad i = 1, 2, \ldots\]</div>
+</li>
+<li><p><strong>Initial Round</strong>: The input data block is XORed with the first round key.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[P_{\text{initial}} = \text{Input data} \oplus K_0\]</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>Rounds</strong>: AES performs multiple rounds depending on the key size (10, 12, or 14). Each round involves the following operations:</p>
+<ol class="arabic simple">
+<li><p><strong>SubBytes</strong>: Each byte in the state is substituted using the S-box, <span class="math notranslate nohighlight">\(S\)</span>.</p></li>
+<li><p><strong>ShiftRows</strong>: The rows of the state are cyclically shifted by a certain number of positions.</p></li>
+<li><p><strong>MixColumns</strong>: The columns of the state are mixed using a fixed matrix.</p></li>
+<li><p><strong>AddRoundKey</strong>: The round key is XORed with the state.</p></li>
+</ol>
+</li>
+<li><p><strong>Final Round</strong>: The final round skips the MixColumns step and only involves SubBytes, ShiftRows, and AddRoundKey.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[P_{\text{final}} = \text{State after final round}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The decryption process is the similar to the encryption process but uses inverse of the operations, denoted by prefix <code class="docutils literal notranslate"><span class="pre">Inv</span></code> before the operation name.</p>
+</div>
+</section>
+<section id="round-function">
+<h3>Round Function<a class="headerlink" href="#round-function" title="Link to this heading">#</a></h3>
+<p>The round function for AES involves the following steps:</p>
+<ol class="arabic simple">
+<li><p><strong>SubBytes</strong>: Each byte of the state is substituted using the S-box, <span class="math notranslate nohighlight">\(S\)</span>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[S_{\text{state}} = S(\text{state})\]</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>ShiftRows</strong>: The rows of the state are cyclically shifted. If we represent the state as a 4x4 matrix <span class="math notranslate nohighlight">\(\text{State} = [s_{ij}]\)</span> where <cite>i</cite> is the row index and <cite>j</cite> is the column index, the rows are shifted as follows:</p></li>
+</ol>
+<ul class="simple">
+<li><p>First row remains unchanged.</p></li>
+<li><p>Second row is shifted by 1 byte to the left.</p></li>
+<li><p>Third row is shifted by 2 bytes to the left.</p></li>
+<li><p>Fourth row is shifted by 3 bytes to the left.</p></li>
+</ul>
+<p>For example, if the initial state matrix is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{State} =
+\begin{bmatrix}
+s_{00} &amp; s_{01} &amp; s_{02} &amp; s_{03} \\
+s_{10} &amp; s_{11} &amp; s_{12} &amp; s_{13} \\
+s_{20} &amp; s_{21} &amp; s_{22} &amp; s_{23} \\
+s_{30} &amp; s_{31} &amp; s_{32} &amp; s_{33}
+\end{bmatrix}\end{split}\]</div>
+<p>After <strong>ShiftRows</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{State} =
+\begin{bmatrix}
+s_{00} &amp; s_{01} &amp; s_{02} &amp; s_{03} \\
+s_{11} &amp; s_{12} &amp; s_{13} &amp; s_{10} \\
+s_{22} &amp; s_{23} &amp; s_{20} &amp; s_{21} \\
+s_{33} &amp; s_{30} &amp; s_{31} &amp; s_{32}
+\end{bmatrix}\end{split}\]</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>MixColumns</strong>: This step provides diffusion by mixing the columns of the state matrix. Each column of the state is treated as a polynomial over <span class="math notranslate nohighlight">\(GF(2^8\)</span> (the finite field of 256 elements).</p></li>
+</ol>
+<p>Each column is multiplied by a fixed matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{MixColumn Matrix} =
+\begin{bmatrix}
+2 &amp; 3 &amp; 1 &amp; 1 \\
+1 &amp; 2 &amp; 3 &amp; 1 \\
+1 &amp; 1 &amp; 2 &amp; 3 \\
+3 &amp; 1 &amp; 1 &amp; 2
+\end{bmatrix}\end{split}\]</div>
+<p>The multiplication is performed in <span class="math notranslate nohighlight">\(GF(2^8)\)</span> field, where numbers are represented as polynomials with coefficients in the field. The multiplication of the state column vector <span class="math notranslate nohighlight">\(C = [c_0, c_1, c_2, c_3]^T\)</span> with the MixColumn matrix is done by performing finite field multiplications and additions. Each element of the resulting column is computed as a sum of the individual field multiplications.</p>
+<p>For example, for the first element of the new column:</p>
+<div class="math notranslate nohighlight">
+\[c_0' = \text{Multiply}(2, c_0) \oplus \text{Multiply}(3, c_1) \oplus \text{Multiply}(1, c_2) \oplus \text{Multiply}(1, c_3)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\text{Multiply}(a, b)\)</span> denotes the multiplication of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> in the finite field <span class="math notranslate nohighlight">\(GF(2^8)\)</span>.</p>
+<ol class="arabic simple" start="4">
+<li><p><strong>AddRoundKey</strong>: The round key is XORed with the state:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[S_{\text{state}} \oplus K_i = \text{State after round i}\]</div>
+</section>
+<section id="key-schedule">
+<h3>Key Schedule<a class="headerlink" href="#key-schedule" title="Link to this heading">#</a></h3>
+<p>AES uses a key expansion algorithm to generate a set of round keys from the original key. For each round, a round key is XORed with the state in the AddRoundKey step.</p>
+</section>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example usage of AES to encrypt and decrypt a message</span>
+<span class="kn">from</span> <span class="nn">cryptosystems</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">(</span><span class="s2">&quot;passwordpassword&quot;</span><span class="p">)</span>  <span class="c1"># Example 256-bit key</span>
+<span class="n">ciphertext</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>  <span class="c1"># b&#39;\x97\x89\xab\xde\xfa\x2a\x1c\xd9\xb0\xa5\x96\x4c\xf4\xfc\x45\x59&#39;</span>
+<span class="n">plaintext</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ciphertext</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">plaintext</span><span class="p">)</span>  <span class="c1"># &#39;Hello World&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="encrypt">
+<span class="sig-name descname"><span class="pre">encrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plaintext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></span><a class="headerlink" href="#encrypt" title="Link to this definition">#</a></dt>
+<dd><p>Encrypts the given plaintext using AES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>plaintext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><em>str</em></a>) – The plaintext message to be encrypted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encrypted ciphertext.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="decrypt">
+<span class="sig-name descname"><span class="pre">decrypt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ciphertext</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="headerlink" href="#decrypt" title="Link to this definition">#</a></dt>
+<dd><p>Decrypts the given ciphertext using AES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ciphertext</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><em>bytes</em></a>) – The ciphertext message to be decrypted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decrypted plaintext.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Key Size</strong>: AES supports key sizes of 128, 192, or 256 bits, providing strong security.</p></li>
+<li><p><strong>Block Size</strong>: AES operates on 128-bit blocks.</p></li>
+<li><p><strong>Security</strong>: AES is considered secure against all known practical attacks and is widely used for securing sensitive data.</p></li>
+<li><p><strong>Application</strong>: AES is used in a variety of applications, including securing communications, data storage, and financial transactions.</p></li>
+<li><p><strong>Speed</strong>: AES is highly efficient and fast compared to older encryption algorithms like DES.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="DES.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">DES</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../asymmetric/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Asymmetric Cryptosystems</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AES"><code class="docutils literal notranslate"><span class="pre">AES</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-details">Mathematical Details</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aes-encryption-decryption-process">AES Encryption/Decryption Process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#round-function">Round Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-schedule">Key Schedule</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encrypt"><code class="docutils literal notranslate"><span class="pre">encrypt()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decrypt"><code class="docutils literal notranslate"><span class="pre">decrypt()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Ishan Surana
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Ishan Surana.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

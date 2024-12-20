@@ -1,0 +1,45 @@
+SHA256
+======
+
+The ``SHA256`` class implements the SHA-256 hash algorithm, as a direct wrapper on top of the functionality provided by ``hashlib``, which is part of the SHA-2 family of cryptographic hash functions. SHA-256 is widely used for generating secure 256-bit hash values from arbitrary input data and is commonly used in digital signatures, certificates, and blockchain technologies.
+
+.. class:: SHA256
+
+    Creates a new SHA256 instance.
+
+Introduction
+------------
+
+SHA-256 (Secure Hash Algorithm 256-bit) is one of the most popular cryptographic hash functions used today. It produces a 256-bit hash value, which is typically represented as a 64-character hexadecimal number. SHA-256 is widely used in security applications and protocols, including TLS and SSL, PGP, SSH, and Bitcoin. It is a member of the SHA-2 family, which was designed to overcome the weaknesses found in SHA-1.
+
+Usage
+-----
+
+.. code-block:: python
+
+    # Example usage of SHA256 to generate hash
+    from cryptosystems import SHA256
+    sha256 = SHA256()
+    message_hash = sha256.hash("Hello World") # b'\x7f\x83\xb1e\x7f\xf1\xfcS\xb9-\xc1\x81H\xa1\xd6]\xfc-K\x1f\xa3\xd6w(J\xdd\xd2\x00\x12m\x90i'
+    file_hash = sha256.hash_file("test.txt") # b'\x7f\x83\xb1e\x7f\xf1\xfcS\xb9-\xc1\x81H\xa1\xd6]\xfc-K\x1f\xa3\xd6w(J\xdd\xd2\x00\x12m\x90i'
+
+Methods
+-------
+
+.. function:: hash(message: (int | str | bytes)) -> bytes
+
+    Hashes the given message using the SHA-256 Algorithm and returns the digest.
+
+    :param message: The message to compute the MD5 hash of.
+    :type hash_value: int | str | bytes
+    :return: The SHA-256 hash digest of the message.
+    :rtype: str
+
+.. function:: hash_file(file: str) -> bytes
+
+    Hashes the given file using the SHA-256 Algorithm and returns the digest.
+
+    :param file: The original hash value to compare with the computed hash.
+    :type file: str
+    :return: The SHA-256 hash digest of the file with the given filename.
+    :rtype: str
