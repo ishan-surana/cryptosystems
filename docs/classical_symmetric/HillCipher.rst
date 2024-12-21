@@ -10,6 +10,10 @@ The ``HillCipher`` class implements the Hill cipher, a polygraphic substitution 
    :param key_matrix: The key matrix used for encryption. Must be square and invertible modulo 26.
    :type key_matrix: list of lists (2x2 or 3x3 matrix)
 
+.. attention::
+
+   HillCipher is a basic symmetric cipher, which should be used ONLY for educational purposes, and NOT in production. Proceed accordingly.
+
 Introduction
 ------------
 The Hill cipher is a classical polygraphic substitution cipher that encrypts blocks of text using matrix multiplication. The cipher operates on groups of letters rather than individual letters, making it more resistant to frequency analysis than traditional monoalphabetic ciphers. The encryption and decryption processes involve matrix operations with a key matrix, providing a more complex and secure method of encryption compared to simpler ciphers.

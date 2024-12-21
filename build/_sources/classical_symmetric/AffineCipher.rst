@@ -12,6 +12,10 @@ The ``AffineCipher`` class implements the Affine cipher, a type of monoalphabeti
     :param b: The additive key.
     :type b: int
 
+.. attention::
+
+   AffineCipher is a basic symmetric cipher, which should be used ONLY for educational purposes, and NOT in production. Proceed accordingly.
+
 Introduction
 ------------
 The Affine cipher is a type of monoalphabetic substitution cipher. It is a combination of the Additive and Multiplicative ciphers, having two keys: one for addition and one for multiplication. Each character in the plaintext is shifted by a fixed number of positions based on the given keys, first by multiplication and then by addition. This creates a more complex encryption than either multiplicative or additive ciphers alone.

@@ -1,7 +1,11 @@
 Standards
 =========
 
-The ``cryptosystems`` library references to the highest standards of security and cryptography, including those set forth by the **National Institute of Standards and Technology (NIST)**. This ensures that the implementation aims to follow the best established practices and recommendations for secure cryptographic algorithms, key exchange protocols, hash functions and mathematical utilities.
+The ``cryptosystems`` library references the highest standards of security and cryptography, including those set forth by the **National Institute of Standards and Technology (NIST)**. This ensures that the implementation aims to follow the best established practices and recommendations for secure cryptographic algorithms, key exchange protocols, hash functions and mathematical utilities.
+
+.. attention::
+
+   As of now, this library stands as a personal project of mine. It has **not** been audited by any authority. It also contains many basic symmetric ciphers, which should be used ONLY for educational purposes, and NOT in production. The same point stands for other cryptosystems due to appropriate padding schemes not formed yet, and the project not having been formally verified. **Please do not use this library in production until it is audited and certified.**
 
 Below is a list of key **Federal Information Processing Standard (FIPS)** and **Special Publications (SPs)** that were referred:
 

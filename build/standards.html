@@ -428,7 +428,11 @@ document.write(`
                   
   <section id="standards">
 <h1>Standards<a class="headerlink" href="#standards" title="Link to this heading">#</a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">cryptosystems</span></code> library references to the highest standards of security and cryptography, including those set forth by the <strong>National Institute of Standards and Technology (NIST)</strong>. This ensures that the implementation aims to follow the best established practices and recommendations for secure cryptographic algorithms, key exchange protocols, hash functions and mathematical utilities.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cryptosystems</span></code> library references the highest standards of security and cryptography, including those set forth by the <strong>National Institute of Standards and Technology (NIST)</strong>. This ensures that the implementation aims to follow the best established practices and recommendations for secure cryptographic algorithms, key exchange protocols, hash functions and mathematical utilities.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>As of now, this library stands as a personal project of mine. It has <strong>not</strong> been audited by any authority. It also contains many basic symmetric ciphers, which should be used ONLY for educational purposes, and NOT in production. The same point stands for other cryptosystems due to appropriate padding schemes not formed yet, and the project not having been formally verified. <strong>Please do not use this library in production until it is audited and certified.</strong></p>
+</div>
 <p>Below is a list of key <strong>Federal Information Processing Standard (FIPS)</strong> and <strong>Special Publications (SPs)</strong> that were referred:</p>
 <ul class="simple">
 <li><p><strong>NIST FIPS 186-5:-</strong> <a class="reference external" href="https://doi.org/10.6028/NIST.FIPS.186-5">Digital Signature Standard (DSS)</a></p></li>

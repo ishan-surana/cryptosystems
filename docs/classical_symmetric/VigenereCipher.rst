@@ -10,6 +10,10 @@ The ``VigenèreCipher`` class implements the Vigenère cipher, a polyalphabetic 
     :param key: The keyword used for encryption. The keyword is repeated as necessary to match the length of the plaintext.
     :type key: str
 
+.. attention::
+
+   VigenereCipher is a basic symmetric cipher, which should be used ONLY for educational purposes, and NOT in production. Proceed accordingly.
+
 Introduction
 ------------
 The Vigenère cipher is a method of encrypting alphabetic text by using a keyword to generate a sequence of Caesar ciphers. Unlike the Caesar cipher, which shifts letters by a fixed number, the Vigenère cipher applies different shifts based on the letters of the keyword, making it a polyalphabetic cipher. This results in greater security compared to monoalphabetic substitution ciphers.

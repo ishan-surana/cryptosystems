@@ -11,6 +11,10 @@ The ``PlayfairCipher`` class implements the Playfair cipher, a classical digraph
                 Non-letter characters are ignored, and duplicates are removed.
     :type key: str
 
+.. attention::
+
+   PlayfairCipher is a basic symmetric cipher, which should be used ONLY for educational purposes, and NOT in production. Proceed accordingly.
+
 Introduction
 ------------
 The Playfair cipher is a classical substitution cipher that encrypts pairs of letters (digraphs) rather than individual letters. It was invented by Charles Wheatstone in 1854 and was later popularized by the British during World War I. The cipher uses a 5x5 matrix containing letters of the alphabet (usually omitting 'J'). Each pair of plaintext letters is substituted with letters from the matrix according to a set specific rule.

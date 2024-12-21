@@ -10,6 +10,10 @@ The ``AdditiveCipher`` class implements the Additive Cipher, a type of monoalpha
    :param key: The integer by which each letter in the plaintext is shifted. Valid values are between 0 and 25.
    :type key: int
 
+.. attention::
+
+   AdditiveCipher is a basic symmetric cipher, which should be used ONLY for educational purposes, and NOT in production. Proceed accordingly.
+
 Introduction
 -------------
 The Additive Cipher (also known as the Caesar Cipher) is one of the oldest known encryption techniques. Each character in the plaintext is shifted by a fixed number of positions based on a given key. Although easy to implement, this cipher is insecure for practical use since it is easily broken by frequency analysis.

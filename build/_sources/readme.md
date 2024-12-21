@@ -1,6 +1,6 @@
 
 ## Overview
-The `cryptosystems` package offers a robust suite of classes and functions for both symmetric and asymmetric encryption, as well as hashing functionalities. Designed for seamless encryption, decryption, and cryptographic operations, this package is lightweight and efficient, relying solely on Python’s built-in libraries: `ctypes` and `hashlib`. With all cryptographic logic implemented from scratch, cryptosystems provides a streamlined, dependency-free solution, ensuring consistency and reliability across different environments as well as Python versions.
+The `cryptosystems` package offers a suite of classes and functions for both symmetric and asymmetric encryption, as well as hashing functionalities. Designed for seamless encryption, decryption, and cryptographic operations, this package is lightweight and efficient, relying solely on Python’s built-in libraries: `ctypes`, `warnings` and `hashlib`. With all cryptographic logic implemented from scratch, cryptosystems provides a streamlined, dependency-free solution, ensuring consistency and reliability across different environments as well as Python versions.
 
 ## Key Advantages
 - **Dependency-Free** 🚫📦: Operates solely on Python's built-in modules, eliminating the need for external libraries.

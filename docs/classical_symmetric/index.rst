@@ -3,6 +3,10 @@ Classical Symmetric Cryptosystems
 
 This is the index file for the classical symmetric cryptosystems. The classical symmetric cryptosystems are implemented in the ``classical_symmetric`` submodule and can be imported directly from the package.
 
+.. attention::
+
+   Basic symmetric ciphers should be used ONLY for educational purposes, and NOT in production. Proceed accordingly.
+
 --------------
 Introduction
 --------------
